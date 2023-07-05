@@ -1,0 +1,1 @@
+# taform-azurerm-module-managed-disk
