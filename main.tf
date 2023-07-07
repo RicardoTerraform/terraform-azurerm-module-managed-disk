@@ -33,7 +33,6 @@ resource "azurerm_managed_disk" "example" {
   encryption_settings {
 
     dynamic "disk_encryption_key" {
-
       for_each = var.disk_encryption_secret != null ? ["true"] : []
 
       content {
