@@ -95,12 +95,6 @@ variable "os_disk_size_gb" {
   type        = string
   description = "Specifies the size of the OS disk in gigabytes"
   default     = null
-
-  validation {
-
-    condition     = (var.os_storage_account_type == "UltraSSD") || (var.os_storage_account_type == "PremiumV2")
-    error_message = "The variable os_disk_size_gb is required only for UltraSSD and PremiumV2 storage account types."
-  }
 }
 
 variable "os_type" {
