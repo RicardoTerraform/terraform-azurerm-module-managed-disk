@@ -55,12 +55,13 @@ resource "azurerm_managed_disk" "example" {
   encryption_settings {
 
 
-    key_encryption_key {
-
+    dynamic "key_encryption_key" {
+      for_each = var.key_encryption_key != null ? ["true"] : []
+      content{
       source_vault_id = var.key_encryption_key["source_vault_id"]
       key_url         = var.key_encryption_key["key_url"]
     }
-
+    }
   }
 
   tags = merge(local.tags_default, var.tags)
