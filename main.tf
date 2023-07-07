@@ -29,10 +29,8 @@ resource "azurerm_managed_disk" "example" {
   zone                = var.vm_avail_zone_id
   logical_sector_size = var.logical_sector_size
 
-  dynamic "encryption_settings" {
-    for_each = var.disk_encryption_secret != null ? [var.disk_encryption_secret] : []
+encryption_settings {
 
-    content {
       dynamic "disk_encryption_key" {
 
         for_each = var.disk_encryption_secret != null ? [var.disk_encryption_secret] : []
@@ -42,8 +40,8 @@ resource "azurerm_managed_disk" "example" {
           secret_url      = disk_encryption_key.value.secret_url
         }
       }
-    }
-    content {
+    
+
       dynamic "key_encryption_key" {
         for_each = var.key_encryption_key != null ? ["true"] : []
 
@@ -53,7 +51,7 @@ resource "azurerm_managed_disk" "example" {
         }
       }
     }
-  }
+  
 
   tags = merge(local.tags_default, var.tags)
 }
