@@ -16,10 +16,10 @@ resource "azurerm_managed_disk" "example" {
   upload_size_bytes = contains(["Upload"], var.creation) ? var.upload_size_bytes : null
 
   #UltraSSD", "PremiumV2
-  disk_iops_read_write = contains(["UltraSSD", "PremiumV2"], var.instance_type) ? var.disk_iops_read_write : null
-  disk_mbps_read_write = contains(["UltraSSD", "PremiumV2"], var.instance_type) ? var.disk_mbps_read_write : null
-  disk_iops_read_only  = contains(["UltraSSD", "PremiumV2"], var.instance_type) ? var.disk_iops_read_only : null
-  disk_mbps_read_only  = contains(["UltraSSD", "PremiumV2"], var.instance_type) ? var.disk_mbps_read_only : null
+  disk_iops_read_write = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_iops_read_write : null
+  disk_mbps_read_write = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_mbps_read_write : null
+  disk_iops_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_iops_read_only : null
+  disk_mbps_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_mbps_read_only : null
 
   #edge_zone = ?
 
