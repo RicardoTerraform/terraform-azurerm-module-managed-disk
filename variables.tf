@@ -13,6 +13,12 @@ variable "environment" {
   description = "This defines the environment of the resource. two options: dev | prd"
 }
 
+variable "creation" {
+  type        = string
+  description = "This defines the method to use when creating the managed disk. Import|ImportSecure|Empty!Copy|FromImage|Restore|Upload"
+  default     = "Empty"
+}
+
 variable "location" {
   type        = string
   description = "This defines the location of the resource"
@@ -29,12 +35,6 @@ variable "instance_type" {
   type        = string
   description = "VM instance type. Standard_LRS | StandardSSD_ZRS | Premium_LRS | PremiumV2_LRS | Premium_ZRS | StandardSSD_LRS | UltraSSD_LRS"
   default     = "Standard_B2s"
-}
-
-variable "creation" {
-  type        = string
-  description = "This defines the method to use when creating the managed disk. Import|ImportSecure|Empty!Copy|FromImage|Restore|Upload"
-  default     = "Empty"
 }
 
 variable "source_uri" {
