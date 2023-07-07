@@ -60,5 +60,7 @@ No Modules
 # Outputs
 | Name                           | Description   |
 | ------------------------------ | ------------- |
-
+| disk_id                        | n/a           |
+| disk_attach_id                 | n/a           |
+| disk_name                      | n/a           |
 
