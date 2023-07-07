@@ -32,22 +32,26 @@ resource "azurerm_managed_disk" "manage_disk" {
   max_shares = var.maximum_shares
   zone       = var.vm_avail_zone_id
 
-  encryption_settings {
+  dynamic "encryption_settings" {
+    for_each = var.disk_encryption_secret != null ? ["true"] : []
+    content {
 
-    dynamic "disk_encryption_key" {
-      for_each = var.disk_encryption_secret != null ? ["true"] : []
 
-      content {
-        source_vault_id = var.disk_encryption_secret["source_vault_id"]
-        secret_url      = var.disk_encryption_secret["secret_url"]
+      dynamic "disk_encryption_key" {
+        for_each = var.disk_encryption_secret != null ? ["true"] : []
+
+        content {
+          source_vault_id = var.disk_encryption_secret["source_vault_id"]
+          secret_url      = var.disk_encryption_secret["secret_url"]
+        }
       }
-    }
 
-    dynamic "key_encryption_key" {
-      for_each = var.key_encryption_key != null ? ["true"] : []
-      content {
-        source_vault_id = var.key_encryption_key["source_vault_id"]
-        key_url         = var.key_encryption_key["key_url"]
+      dynamic "key_encryption_key" {
+        for_each = var.key_encryption_key != null ? ["true"] : []
+        content {
+          source_vault_id = var.key_encryption_key["source_vault_id"]
+          key_url         = var.key_encryption_key["key_url"]
+        }
       }
     }
   }
