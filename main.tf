@@ -1,6 +1,6 @@
 #Normal Manage disk (Standar, Premium)
 resource "azurerm_managed_disk" "manage_disk" {
-count = local.manage_disk_normal ? 1 : 0
+  count = local.manage_disk_normal ? 1 : 0
 
   name                = "${var.azure_system_name}-${var.name_disk}-osdisk-${var.environment}"
   location            = var.location
@@ -24,7 +24,7 @@ count = local.manage_disk_normal ? 1 : 0
   #disk_iops_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_iops_read_only : null
   #disk_mbps_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_mbps_read_only : null
   #logical_sector_size  = var.logical_sector_size
-  
+
   #edge_zone = ?
 
   os_type = contains(["Import", "ImportSecure", "Copy"], var.os_type) ? var.os_type : null
@@ -58,7 +58,7 @@ count = local.manage_disk_normal ? 1 : 0
 
 #Manage disk for Ultra SSD and PremiumV2
 resource "azurerm_managed_disk" "manage_disk_ultra_PV2" {
-count = local.manage_disk_normal ? 0 : 1
+  count = local.manage_disk_normal ? 0 : 1
 
   name                = "${var.azure_system_name}-${var.name_disk}-osdisk-${var.environment}"
   location            = var.location
@@ -82,7 +82,7 @@ count = local.manage_disk_normal ? 0 : 1
   #disk_iops_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_iops_read_only : null
   #disk_mbps_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_mbps_read_only : null
   #logical_sector_size  = var.logical_sector_size
-  
+
   #edge_zone = ?
 
   os_type = contains(["Import", "ImportSecure", "Copy"], var.os_type) ? var.os_type : null
