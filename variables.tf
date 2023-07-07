@@ -34,7 +34,7 @@ variable "tags" {
 variable "os_storage_account_type" {
   type        = string
   description = "VM instance type. Standard_LRS | StandardSSD_ZRS | Premium_LRS | PremiumV2_LRS | Premium_ZRS | StandardSSD_LRS | UltraSSD_LRS"
-  default     = "Standard_B2s"
+  default     = "StandardSSD_ZRS"
 }
 
 variable "source_uri" {
@@ -105,8 +105,8 @@ variable "os_type" {
 
 variable "maximum_shares" {
   type        = number
-  description = "The maximum number of VMs that can attach to the disk at the same time"
-  default     = 1
+  description = "The maximum number of VMs that can attach to the disk at the same time. Range (2 - 10)"
+  default     = 2
 }
 
 variable "vm_avail_zone_id" {
