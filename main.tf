@@ -54,16 +54,11 @@ resource "azurerm_managed_disk" "example" {
 
   encryption_settings {
 
-    # disk_encryption_key = {
-    #   source_vault_id = disk_encryption_key.value.source_vault_id
-    #   secret_url      = disk_encryption_key.value.secret_url
-    # }
 
+    key_encryption_key {
 
-    key_encryption_key = {
-
-      source_vault_id = var.disk_encryption_secret["source_vault_id"]
-      key_url         = var.disk_encryption_secret["key_url"]
+      source_vault_id = var.key_encryption_key["source_vault_id"]
+      key_url         = var.key_encryption_key["key_url"]
     }
 
   }
