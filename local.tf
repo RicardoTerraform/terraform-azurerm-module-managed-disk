@@ -2,7 +2,7 @@ locals {
 
   tags_default = {
     system         = lower(var.azure_system_name)
-    environment    = lower(var.vm_environment)
+    environment    = lower(var.environment)
     infrastructure = "terraform"
     module         = "azurerm-managed-disk"
     module_version = "v1.0"
