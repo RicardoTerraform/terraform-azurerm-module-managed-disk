@@ -51,12 +51,12 @@ resource "azurerm_managed_disk" "manage_disk" {
 
   tags = merge(local.tags_default, var.tags)
 
-  lifecycle {
-    precondition {
-      condition     = var.os_disk_size_gb
+  validation {
+
+      condition     = var.os_disk_size_gb != null
       error_message = "The variable os_disk_size_gb is REQUIRED, only for UltraSSD and PremiumV2 (os_Storage_account_type)"
     }
-  }
+  
 }
 
 
@@ -110,12 +110,12 @@ resource "azurerm_managed_disk" "manage_disk_ultra_PV2" {
 
   tags = merge(local.tags_default, var.tags)
 
-  lifecycle {
+  # lifecycle {
 
-    precondition {
-      condition     = var.os_disk_size_gb == null
-      error_message = "The variable os_disk_size_gb is REQUIRED, only for UltraSSD and PremiumV2 (os_Storage_account_type)"
-    }
-  }
+  #   precondition {
+  #     condition     = var.os_disk_size_gb == null
+  #     error_message = "The variable os_disk_size_gb is REQUIRED, only for UltraSSD and PremiumV2 (os_Storage_account_type)"
+  #   }
+  # }
 
 }
