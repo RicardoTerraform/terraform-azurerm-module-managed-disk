@@ -29,29 +29,44 @@ resource "azurerm_managed_disk" "example" {
   zone                = var.vm_avail_zone_id
   logical_sector_size = var.logical_sector_size
 
-encryption_settings {
+  # encryption_settings {
 
-      dynamic "disk_encryption_key" {
+  #       dynamic "disk_encryption_key" {
 
-        for_each = var.disk_encryption_secret != null ? [var.disk_encryption_secret] : []
+  #         for_each = var.disk_encryption_secret != null ? [var.disk_encryption_secret] : []
 
-        content = {
-          source_vault_id = disk_encryption_key.value.source_vault_id
-          secret_url      = disk_encryption_key.value.secret_url
-        }
-      }
-    
+  #         content = {
+  #           source_vault_id = disk_encryption_key.value.source_vault_id
+  #           secret_url      = disk_encryption_key.value.secret_url
+  #         }
+  #       }
 
-      dynamic "key_encryption_key" {
-        for_each = var.key_encryption_key != null ? ["true"] : []
 
-        content = {
-          source_vault_id = var.disk_encryption_secret["source_vault_id"]
-          key_url         = var.disk_encryption_secret["key_url"]
-        }
-      }
+  #       dynamic "key_encryption_key" {
+  #         for_each = var.key_encryption_key != null ? ["true"] : []
+
+  #         content = {
+  #           source_vault_id = var.disk_encryption_secret["source_vault_id"]
+  #           key_url         = var.disk_encryption_secret["key_url"]
+  #         }
+  #       }
+  #     }
+
+  encryption_settings {
+
+    # disk_encryption_key = {
+    #   source_vault_id = disk_encryption_key.value.source_vault_id
+    #   secret_url      = disk_encryption_key.value.secret_url
+    # }
+
+
+    key_encryption_key = {
+
+      source_vault_id = var.disk_encryption_secret["source_vault_id"]
+      key_url         = var.disk_encryption_secret["key_url"]
     }
-  
+
+  }
 
   tags = merge(local.tags_default, var.tags)
 }
