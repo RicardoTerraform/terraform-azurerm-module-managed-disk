@@ -7,7 +7,7 @@ resource "azurerm_managed_disk" "manage_disk" {
   resource_group_name = data.azurerm_resource_group.rgname.name
 
   storage_account_type = var.os_storage_account_type
-  disk_size_gb         = os_disk_size_gb != null ? [for size in local.disks_tiers[split("_", var.os_storage_account_type)[0]] : size if size >= var.os_disk_size_gb][0] : null
+  disk_size_gb         = var.os_disk_size_gb != null ? [for size in local.disks_tiers[split("_", var.os_storage_account_type)[0]] : size if size >= var.os_disk_size_gb][0] : null
   #disk_size_gb         = split("_", var.os_storage_account_type)[0] != "PremiumV2" ? [for size in local.disks_tiers[split("_", var.os_storage_account_type)[0]] : size if size >= var.os_disk_size_gb][0] : var.os_disk_size_gb
 
   create_option      = var.creation
