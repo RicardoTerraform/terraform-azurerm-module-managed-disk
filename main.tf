@@ -53,7 +53,7 @@ resource "azurerm_managed_disk" "manage_disk" {
 
   lifecycle {
 
-    poscondition {
+    postcondition {
       condition     = var.os_disk_size_gb == null
       error_message = "The variable os_disk_size_gb is required only for UltraSSD and PremiumV2 storage account types."
     }
