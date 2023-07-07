@@ -119,7 +119,6 @@ variable "logical_sector_size" {
   type        = number
   description = "Logical Sector Size. Possible values are: 512 and 4096. Defaults to 4096"
   default     = 4096
-
 }
 
 variable "disk_encryption_secret" {

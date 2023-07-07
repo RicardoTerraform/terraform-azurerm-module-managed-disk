@@ -51,14 +51,14 @@ resource "azurerm_managed_disk" "manage_disk" {
 
   tags = merge(local.tags_default, var.tags)
 
-lifecycle {
+  lifecycle {
     # The AMI ID must refer to an AMI that contains an operating system
     # for the `x86_64` architecture.
     precondition {
       condition     = var.os_disk_size_gb == null
       error_message = "The selected AMI must be for the x86_64 architecture."
     }
-}
+  }
 }
 
 #Manage disk for Ultra SSD and PremiumV2
