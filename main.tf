@@ -59,7 +59,7 @@ lifecycle {
       error_message = "The selected AMI must be for the x86_64 architecture."
     }
 }
-
+}
 
 #Manage disk for Ultra SSD and PremiumV2
 resource "azurerm_managed_disk" "manage_disk_ultra_PV2" {
