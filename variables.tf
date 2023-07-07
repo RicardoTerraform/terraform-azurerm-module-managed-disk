@@ -98,7 +98,7 @@ variable "os_disk_size_gb" {
 
   validation {
 
-    condition     = contains(["UltraSSD","PremiumV2"],var.os_storage_account_type)
+    condition     = (var.os_storage_account_type == "UltraSSD") || (var.os_storage_account_type == "PremiumV2")
     error_message = "The variable os_disk_size_gb is REQUIRED, only for UltraSSD and PremiumV2 (os_Storage_account_type)"
   }
 }
