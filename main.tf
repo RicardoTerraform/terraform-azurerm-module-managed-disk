@@ -111,6 +111,6 @@ resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
   virtual_machine_id        = data.azurerm_virtual_machine.vm.id
   lun                       = var.lun
   caching                   = var.caching
-  create_option             = contains(["Empty"], var.creation) ? var.reation : "Attach"
+  create_option             = contains(["Empty"], var.creation) ? var.creation : "Attach"
   write_accelerator_enabled = var.write_accelerator_enabled
 }
