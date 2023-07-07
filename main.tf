@@ -20,14 +20,14 @@ resource "azurerm_managed_disk" "example" {
   disk_mbps_read_write = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_mbps_read_write : null
   disk_iops_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_iops_read_only : null
   disk_mbps_read_only  = contains(["UltraSSD", "PremiumV2"], var.os_storage_account_type) ? var.disk_mbps_read_only : null
-
+  logical_sector_size  = var.logical_sector_size
   #edge_zone = ?
 
   os_type = contains(["Import", "ImportSecure", "Copy"], var.os_type) ? var.os_type : null
 
-  max_shares          = var.maximum_shares
-  zone                = var.vm_avail_zone_id
-  logical_sector_size = var.logical_sector_size
+  max_shares = var.maximum_shares
+  zone       = var.vm_avail_zone_id
+
 
 
   encryption_settings {

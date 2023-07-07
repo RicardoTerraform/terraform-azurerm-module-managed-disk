@@ -68,7 +68,7 @@ variable "upload_size_bytes" {
 }
 
 variable "disk_iops_read_write" {
-  type        = any
+  type        = string
   description = "To set this, the variable 'instance_type' must be set with 'UltraSSD' or 'PremiumV2'.The number of IOPS allowed for this disk"
   default     = null
 }
