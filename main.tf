@@ -24,7 +24,7 @@ resource "azurerm_managed_disk" "manage_disk" {
   os_type = contains(["Import", "ImportSecure", "Copy"], var.os_type) ? var.os_type : null
 
   max_shares = var.maximum_shares
-  zone       = var.vm_avail_zone_id
+  zone       = var.avail_zone_id
 
   dynamic "encryption_settings" {
     for_each = var.disk_encryption_secret != null ? ["true"] : var.key_encryption_key != null ? ["true"] : []

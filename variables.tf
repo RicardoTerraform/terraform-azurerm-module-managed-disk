@@ -13,14 +13,20 @@ variable "environment" {
   description = "This defines the environment of the resource. two options: dev | prd"
 }
 
+variable "os_disk_size_gb" {
+  type        = string
+  description = "Specifies the size of the OS disk in gigabytes"
+  default     = null
+}
+
 variable "vm_name" {
   type    = string
-  default = "What is the Virtual Machine name ?"
+  default = "Required only when we want to attach the disk to a vm. This defines the name of the VM. Not the full name, only the name given when creating a vm *vm_name."
 }
 
 variable "creation" {
   type        = string
-  description = "This defines the method to use when creating the managed disk. Import|ImportSecure|Empty!Copy|FromImage|Restore|Upload"
+  description = "This defines the method to use when creating the managed disk. Import|ImportSecure|Empty|Copy|FromImage|Restore|Upload"
   default     = "Empty"
 }
 
@@ -43,7 +49,7 @@ variable "os_storage_account_type" {
 }
 
 variable "source_uri" {
-  type        = any
+  type        = string
   description = "To set this, the variable 'creation' must be set with 'Import' or 'ImportSecure'. Import a VHD file in to the managed disk"
   default     = null
 }
@@ -96,12 +102,6 @@ variable "disk_mbps_read_only" {
   default     = null
 }
 
-variable "os_disk_size_gb" {
-  type        = string
-  description = "Specifies the size of the OS disk in gigabytes"
-  default     = null
-}
-
 variable "os_type" {
   type        = string
   description = "Specify a value when the source of an Import, ImportSecure or Copy. 'Windows' | 'Linux'"
@@ -114,8 +114,8 @@ variable "maximum_shares" {
   default     = 2
 }
 
-variable "vm_avail_zone_id" {
-  type        = number
+variable "avail_zone_id" {
+  type        = string
   description = "Index of the Availability Zone which the Virtual Machine should be allocated in."
   default     = null
 }
