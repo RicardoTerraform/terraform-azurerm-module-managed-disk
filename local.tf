@@ -1,4 +1,6 @@
 locals {
+manage_disk_normal = contains(["Standard", "StandardSSD", "Premium"], split("_", var.os_storage_account_type)[0] ) ? true : false
+
 
   tags_default = {
     system         = lower(var.azure_system_name)
