@@ -13,6 +13,11 @@ variable "environment" {
   description = "This defines the environment of the resource. two options: dev | prd"
 }
 
+variable "vm_name" {
+  type    = string
+  default = "What is the Virtual Machine name ?"
+}
+
 variable "creation" {
   type        = string
   description = "This defines the method to use when creating the managed disk. Import|ImportSecure|Empty!Copy|FromImage|Restore|Upload"
@@ -137,4 +142,28 @@ variable "key_encryption_key" {
   })
   description = "Refers to the encryption Key used for encrypting the data on an Azure managed disk. source_vault_id The ID of the source Key Vault ('Resource ID') / key_url The URL to the Key Vault Key used as the Key Encryption Key ('key Identifier')"
   default     = null
+}
+
+variable "disk_attach" {
+  type        = bool
+  description = "Is it to attach to a Virtual Machine?"
+  default     = false
+}
+
+variable "lun" {
+  type        = number
+  description = "Logic unit number of a data disk attached to a virtual machine"
+  default     = 0
+}
+
+variable "caching" {
+  type        = string
+  description = "Specifies the caching requirements for this Data Disk. 'None' or 'ReadOnly' or 'ReadWrite'"
+  default     = "None"
+}
+
+variable "write_accelerator_enabled" {
+  type        = bool
+  description = "Specifies if Write Accelerator is enabled on the disk. This can only be enabled on Premium_LRS managed disks with no caching and M-Series VMs."
+  default     = false
 }

@@ -1,6 +1,6 @@
 locals {
   manage_disk_normal = contains(["Standard", "StandardSSD", "Premium"], split("_", var.os_storage_account_type)[0]) ? true : false
-
+  disk_id            = local.manage_disk_normal ? azurerm_managed_disk.manage_disk[0].id : azurerm_managed_disk.manage_disk_ultra_PV2[0].id
 
   tags_default = {
     system         = lower(var.azure_system_name)

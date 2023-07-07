@@ -102,5 +102,15 @@ resource "azurerm_managed_disk" "manage_disk_ultra_PV2" {
   }
 
   tags = merge(local.tags_default, var.tags)
+}
 
+resource "azurerm_virtual_machine_data_disk_attachment" "disk_attachment" {
+  count = var.disk_attach ? 1 : 0
+
+  managed_disk_id           = local.disk_id
+  virtual_machine_id        = data.azurerm_virtual_machine.vm.id
+  lun                       = var.lun
+  caching                   = var.caching
+  create_option             = contains(["Empty"], var.creation) ? var.reation : "Attach"
+  write_accelerator_enabled = var.write_accelerator_enabled
 }
