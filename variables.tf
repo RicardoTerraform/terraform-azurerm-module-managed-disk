@@ -31,7 +31,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "instance_type" {
+variable "os_storage_account_type" {
   type        = string
   description = "VM instance type. Standard_LRS | StandardSSD_ZRS | Premium_LRS | PremiumV2_LRS | Premium_ZRS | StandardSSD_LRS | UltraSSD_LRS"
   default     = "Standard_B2s"
@@ -91,7 +91,7 @@ variable "disk_mbps_read_only" {
   default     = null
 }
 
-variable "disk_size" {
+variable "os_disk_size_gb" {
   type        = string
   description = "Specifies the size of the OS disk in gigabytes"
   default     = null
