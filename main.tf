@@ -4,7 +4,7 @@ resource "azurerm_managed_disk" "example" {
   resource_group_name = data.azurerm_resource_group.rgname
 
   storage_account_type = var.os_storage_account_type
-  disk_size            = split("_", var.os_storage_account_type)[0] != "PremiumV2" ? [for size in local.disks_tiers[split("_", var.os_storage_account_type)[0]] : size if size >= var.os_disk_size_gb][0] : var.os_disk_size_gb
+  disk_size_disk_size_gb =             = split("_", var.os_storage_account_type)[0] != "PremiumV2" ? [for size in local.disks_tiers[split("_", var.os_storage_account_type)[0]] : size if size >= var.os_disk_size_gb][0] : var.os_disk_size_gb
 
   create_option      = var.creation
   source_uri         = contains(["Import", "ImportSecure"], var.creation) ? var.source_uri : null
@@ -29,18 +29,21 @@ resource "azurerm_managed_disk" "example" {
   zone                = var.vm_avail_zone_id
   logical_sector_size = var.logical_sector_size
 
-  encryption_settings {
+  dynamic "encryption_settings" {
+    for_each = var.disk_encryption_secret != null ? [var.disk_encryption_secret] : []
 
+content {
     dynamic "disk_encryption_key" {
 
-      for_each = var.disk_encryption_secret != null ? ["true"] : []
+      for_each = var.disk_encryption_secret != null ? [var.disk_encryption_secret] : []
 
       content = {
-        source_vault_id = var.disk_encryption_secret["source_vault_id"]
-        secret_url      = var.disk_encryption_secret["secret_url"]
+        source_vault_id = disk_encryption_key.value.source_vault_id
+        secret_url      = disk_encryption_key.value.secret_url
       }
     }
-
+}
+content {
     dynamic "key_encryption_key" {
       for_each = var.key_encryption_key != null ? ["true"] : []
 
@@ -50,5 +53,7 @@ resource "azurerm_managed_disk" "example" {
       }
     }
   }
+  }
+  
   tags = merge(local.tags_default, var.tags)
 }
