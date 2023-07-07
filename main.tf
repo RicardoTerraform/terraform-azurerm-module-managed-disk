@@ -3,9 +3,9 @@ resource "azurerm_managed_disk" "example" {
   location             = var.location
   resource_group_name  = data.azurerm_resource_group.rgname
 
-  disk_size_gb         = split("_", var.storage_account_type)[0] != "PremiumV2" ? [for size in local.disks_tiers[split("_", var.storage_account_type)[0]] : size if size >= var.disk_size][0] : var.disk_size
   storage_account_type = var.instance_type
-
+  disk_size         = split("_", var.instance_type)[0] != "PremiumV2" ? [for size in local.disks_tiers[split("_", var.instance_type)[0]] : size if size >= var.disk_size][0] : var.disk_size
+  
   create_option      = var.creation
   source_uri         = contains(["Import", "ImportSecure"], var.creation) ? var.source_uri : null
   source_resource_id = contains(["Copy", "Restore"], var.creation) ? var.source_resource_id : null
